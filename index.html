@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untukmu, Nur Chofifah</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            min-height: 100dvh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Warna background dibuat lebih kalem (soft twilight / midnight blue) agar estetik */
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            color: #fff;
+            touch-action: none;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 45px 35px;
+            text-align: center;
+            max-width: 500px;
+            width: 88%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .greeting {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 25px;
+            color: #e2e8f0;
+            letter-spacing: 1px;
+        }
+
+        /* Teks dibuat lebih clean dan minimalis */
+        .puisi {
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: #cbd5e1;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .ending {
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            background: linear-gradient(to right, #f472b6, #fb7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            min-height: 120px;
+        }
+
+        @media (min-width: 400px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+                min-height: 50px;
+            }
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 0.95em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            z-index: 20;
+            width: 190px;
+        }
+
+        /* Tombol Yes lebih kalem (Estetik) */
+        .btn-yes {
+            background: rgba(244, 114, 182, 0.9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 114, 182, 0.3);
+        }
+        .btn-yes:hover, .btn-yes:active {
+            background: rgba(251, 113, 133, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 114, 182, 0.4);
+        }
+
+        /* Tombol No */
+        .btn-no {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: top 0.2s ease, left 0.2s ease;
+            position: relative;
+        }
+
+        #pesan-balasan {
+            display: none;
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #fce7f3;
+            font-weight: 400;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="glass-card" id="main-card">
+    <div class="greeting" id="teks-greeting">
+        Untukmu, Nur Chofifah
+    </div>
+    
+    <div class="puisi" id="teks-puisi">
+        Aku tidak pernah pandai menyusun kata yang megah.<br>
+        Tapi jika ada satu hal yang paling aku syukuri,<br>
+        itu adalah hari di mana semesta mempertemukan kita.<br><br>
+        Kamu adalah kebetulan yang paling indah,<br>
+        dan tenang yang selalu aku cari.
+    </div>
+    
+    <div class="ending" id="teks-ending">
+        I Love You
+    </div>
+
+    <div class="buttons" id="btn-group">
+        <button class="btn-yes" onclick="terimaCinta()">I Love You Too</button>
+        <button class="btn-no" id="btn-no">I Don't Love You</button>
+    </div>
+
+    <div id="pesan-balasan"></div>
+</div>
+
+<script>
+    // Bintang Latar Belakang (Dibuat lebih sedikit agar minimalis dan estetik)
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+        let star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = Math.random() * 2.5 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDuration = (Math.random() * 4 + 2) + 's';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        starsContainer.appendChild(star);
+    }
+
+    // Tombol Kabur
+    const btnNo = document.getElementById('btn-no');
+    
+    function kabur(e) {
+        if(e) e.preventDefault(); 
+
+        btnNo.style.position = 'fixed';
+        
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const btnWidth = btnNo.offsetWidth;
+        const btnHeight = btnNo.offsetHeight;
+
+        const padding = 30; 
+        
+        const maxX = windowWidth - btnWidth - padding;
+        const maxY = windowHeight - btnHeight - padding;
+
+        const randomX = Math.max(padding, Math.random() * maxX);
+        const randomY = Math.max(padding, Math.random() * maxY);
+
+        btnNo.style.left = randomX + 'px';
+        btnNo.style.top = randomY + 'px';
+    }
+
+    btnNo.addEventListener('mouseover', kabur);
+    btnNo.addEventListener('touchstart', kabur, {passive: false});
+    btnNo.addEventListener('click', kabur);
+
+    // Tombol Diterima (Pesan balasan dibuat lebih dewasa dan tulus)
+    function terimaCinta() {
+        document.getElementById('teks-greeting').style.display = 'none';
+        document.getElementById('teks-puisi').style.display = 'none';
+        document.getElementById('teks-ending').style.display = 'none';
+        document.getElementById('btn-group').style.display = 'none';
+        btnNo.style.display = 'none';
+        
+        const pesan = document.getElementById('pesan-balasan');
+        pesan.style.display = 'block';
+        pesan.innerHTML = "Terima kasih sudah menerima rasaku, Nur Chofifah.<br><br>Mari berjalan bersama, perlahan, untuk waktu yang lama. ❤️";
+    }
+</script>
+
+</body>
+</html>
